@@ -1,3 +1,4 @@
+print("")
 print("Wordle".center(40, "="))
 
 rules = """
@@ -34,10 +35,12 @@ yellow = "\033[33m"
 grey  = "\033[0m"
 
 with open("words.txt") as f:
-    words = f.read().lower() .splitlines() # turns each line into a list item
+    words = f.read().lower().splitlines() # turns each line into a list item
 
 
 word = random.choice(words)  # secret word only from real answers
+
+print("Type 'give-up' to give up")
 
 while True:
     final = ""
@@ -48,6 +51,13 @@ while True:
         break
     while True:
         guess = input("Guess: ").lower().strip()
+
+        if guess == "give-up":
+            print(f"You gave up after {guesses-1} tries")
+            print(f"The word was {word}")
+            input("\nPress enter to exit ")
+            exit()
+
         if guess not in words: 
             print(guess, "is not valid")
             continue
@@ -82,4 +92,3 @@ while True:
     print(f"{grey}")
 
 input("\nPress enter to exit ")
-
